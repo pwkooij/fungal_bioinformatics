@@ -1,18 +1,18 @@
-Usage
+Day 1
 =====
 
 .. _installation:
 
-Installation
+Program for today
 ------------
 
-To use Lumache, first install it using pip:
+PROGRAM DETAIL PENDING:
 
 .. code-block:: console
 
    (.venv) $ pip install lumache
 
-Creating recipes
+THIS IS A HEADER
 ----------------
 
 To retrieve a list of random ingredients,
