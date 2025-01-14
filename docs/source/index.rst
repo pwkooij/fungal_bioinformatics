@@ -14,5 +14,5 @@ Contents
 
 .. toctree::
 
-   usage
+   Day1
    api
