@@ -9,10 +9,16 @@ Here we will post information needed for the workshop:
 
    This project is under active development.
 
+> [!note]
+>    This project is under active development.
+
 Contents
 --------
 
 .. toctree::
 
    Day1
+   Day2
+   Day3
+   Day1 backup
    api
