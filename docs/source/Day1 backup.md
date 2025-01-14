@@ -1,8 +1,7 @@
-Day 1
-=====
+# Day 1
 
-Program for today
------------------
+## Program for today
+
 
 PROGRAM DETAIL PENDING:
 
