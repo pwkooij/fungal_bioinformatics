@@ -15,7 +15,8 @@ Here we will post information needed for the workshop:
 
 .. toctree::
 
-   Tuesday January 21 <Day1>
-   Wednesday January 22 <Day2>
-   Thursday January 23 <Day3>
+   Day1
+   Day2
+   Day3
    api
+   Day1 backup
