@@ -1,5 +1,5 @@
 # Read the Docs for Fungal Bioinformatics Workshop
 
-Read the tutorial here:
+Documentation for the fungal genomics and bioinformatics workshop in San Jose, Costa Rica 21-23 Jan 2025
 
-https://docs.readthedocs.io/en/stable/tutorial/
+https://fungal-bioinformatics.readthedocs.io/
