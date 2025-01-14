@@ -13,14 +13,12 @@ Here we will post information needed for the workshop:
 >    This project is under active development.
 
 Contents
-========
+--------
 
 .. toctree::
-:maxdepth: 2
-:caption: Contents:
-   
+
    Day1
    Day2
    Day3
-   api
    Day1 backup
+   api
