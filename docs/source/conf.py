@@ -2,9 +2,9 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = 'Fungal Bioinformatics'
+copyright = '2025, Kooij et al'
+author = 'Kooij'
 
 release = '0.1'
 version = '0.1.0'

@@ -1,5 +1,5 @@
 Welcome to the Fungal Genomics and Bioinformatics Workshop!
-===================================
+===========================================================
 
 Here we will post information needed for the workshop:
 - software packages we use
