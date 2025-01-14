@@ -1,3 +1,4 @@
+# References
 - Blin, K., Shaw, S., Augustijn, H.E., Reitz, Z.L., Biermann, F., Alanjary, M., Fetter, A., Terlouw, B.R., Metcalf, W.W., Helfrich, E.J.N., van Wezel, G.P., Medema, M.H., Weber, T., 2023. antiSMASH 7.0: New and improved predictions for detection, regulation, chemical structures and visualisation. Nucleic Acids Research gkad344. [https://doi.org/10.1093/nar/gkad344](https://doi.org/10.1093/nar/gkad344)
 - Challis, R., Richards, E., Rajan, J., Cochrane, G., Blaxter, M., 2020. BlobToolKit – Interactive quality assessment of genome assemblies. G3 Genes|Genomes|Genetics 10, 1361–1374. [https://doi.org/10.1534/g3.119.400908](https://doi.org/10.1534/g3.119.400908)
 - Hu, J., Wang, Z., Liang, F., Liu, S.-L., Ye, K., Wang, D.-P., 2024. NextPolish2: A repeat-aware polishing tool for genomes assembled using HiFi long reads. Genomics, Proteomics & Bioinformatics 22, qzad009. [https://doi.org/10.1093/gpbjnl/qzad009](https://doi.org/10.1093/gpbjnl/qzad009)
