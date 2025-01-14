@@ -1,4 +1,5 @@
-# Welcome to the Fungal Genomics and Bioinformatics Workshop!
+Welcome to the Fungal Genomics and Bioinformatics Workshop!
+===========================================================
 
 Here we will post information needed for the workshop:
 - software packages we use
@@ -11,7 +12,8 @@ Here we will post information needed for the workshop:
 > [!note]
 >    This project is under active development.
 
-## Contents
+Contents
+========
 
 .. toctree::
 :maxdepth: 2
@@ -22,4 +24,3 @@ Here we will post information needed for the workshop:
    Day3
    api
    Day1 backup
-   mymarkdown
