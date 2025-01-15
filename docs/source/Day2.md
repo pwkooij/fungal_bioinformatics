@@ -7,7 +7,7 @@
 - Completeness check
 - Genome annotation
 
-Hopefully, our assemblies from [[Day1|yesterday]] finished during the night, so now it is time to see what we got, how the quality is, polish the assembly, and do some gene annotations!
+Hopefully, our assemblies from yesterday finished during the night, so now it is time to see what we got, how the quality is, polish the assembly, and do some gene annotations!
 ## Genome Assembly QC
 We can check our assemblies in a variety of ways, e.g., compare it to reference genomes, check the overall statistics, see if there is any contamination that needs to be removed, etc
 
@@ -47,30 +47,30 @@ busco -i [ASSEMBLY FILE] -l [DATASET NAME] -o [OUTPUT_NAME] -m geno -c 10
 ```
 
 > **List of fungal datasets available at the moment**:
->      - fungi_odb10
->        - ascomycota_odb10
->            - dothideomycetes_odb10
->                 - capnodiales_odb10
->                 - pleosporales_odb10
->             - eurotiomycetes_odb10
->                 - chaetothyriales_odb10
->                 - eurotiales_odb10
->                 - onygenales_odb10
->            - leotiomycetes_odb10
->                 - helotiales_odb10
->             - saccharomycetes_odb10
->             - sordariomycetes_odb10
->                 - glomerellales_odb10
->                 - hypocreales_odb10
->        - basidiomycota_odb10
->             - agaricomycetes_odb10
->                 - agaricales_odb10
->                 - boletales_odb10
->                 - polyporales_odb10
->             - tremellomycetes_odb10
->         - microsporidia_odb10
->         - mucoromycota_odb10
->             - mucorales_odb10
+>- fungi_odb10
+>- ascomycota_odb10
+>- dothideomycetes_odb10
+>- capnodiales_odb10
+>- pleosporales_odb10
+>- eurotiomycetes_odb10
+>- chaetothyriales_odb10
+>- eurotiales_odb10
+>- onygenales_odb10
+>- leotiomycetes_odb10
+>- helotiales_odb10
+>- saccharomycetes_odb10
+>- sordariomycetes_odb10
+>- glomerellales_odb10
+>- hypocreales_odb10
+>- basidiomycota_odb10
+>- agaricomycetes_odb10
+>- agaricales_odb10
+>- boletales_odb10
+>- polyporales_odb10
+>- tremellomycetes_odb10
+>- microsporidia_odb10
+>- mucoromycota_odb10
+>- mucorales_odb10
 
 Example of an output:
 ```
@@ -95,7 +95,7 @@ ls PATH/TO/reads1_R1.fq PATH/TO/reads1_R2.fq > PATH/TO/WORKDIR/sgs.fofn
 ls PATH/TO/ont_reads.fq > PATH/TO/WORKDIR/lgs.fofn
 ```
 
-config file which will tell the program where to find the files, where to put the output, and what options to use:
+We will also need to create a config file which will tell the program where to find the files, where to put the output, and what options to use:
 ```
 nano PATH/TO/WORKDIR/run.cfg
 ```
@@ -140,79 +140,41 @@ minimap2 -a -t XX [ASSEMBLY FILE] [READS FILE] > OUTPUT.sam
 racon -m 8 -x -6 -g -8 -w 500 -t XX [READS FILE] OUTPUT.sam [ASSEMBLY FILE] > OUTPUT.fasta
 ```
 
-.. note::
-
-   For Racon settings we have to look at the help output:
-```
-racon [options ...] <sequences> <overlaps> <target sequences>
-
-    # default output is stdout
-    <sequences>
-        input file in FASTA/FASTQ format (can be compressed with gzip)
-        containing sequences used for correction
-    <overlaps>
-        input file in MHAP/PAF/SAM format (can be compressed with gzip)
-        containing overlaps between sequences and target sequences
-    <target sequences>
-        input file in FASTA/FASTQ format (can be compressed with gzip)
-        containing sequences which will be corrected
-
-options:
-    -u, --include-unpolished
-        output unpolished target sequences
-    -f, --fragment-correction
-        perform fragment correction instead of contig polishing (overlaps
-        file should contain dual/self overlaps!)
-    -w, --window-length <int>
-        default: 500
-        size of window on which POA is performed
-    -q, --quality-threshold <float>
-        default: 10.0
-        threshold for average base quality of windows used in POA
-    -e, --error-threshold <float>
-        default: 0.3
-        maximum allowed error rate used for filtering overlaps
-    --no-trimming
-        disables consensus trimming at window ends
-    -m, --match <int>
-        default: 3
-        score for matching bases
-    -x, --mismatch <int>
-        default: -5
-        score for mismatching bases
-    -g, --gap <int>
-        default: -4
-        gap penalty (must be negative)
-    -t, --threads <int>
-        default: 1
-        number of threads
-    --version
-        prints the version number
-    -h, --help
-        prints the usage
-
-only available when built with CUDA:
-    -c, --cudapoa-batches <int>
-        default: 0
-        number of batches for CUDA accelerated polishing per GPU
-    -b, --cuda-banded-alignment
-        use banding approximation for polishing on GPU. Only applicable when -c is used.
-    --cudaaligner-batches <int>
-        default: 0
-        number of batches for CUDA accelerated alignment per GPU
-    --cudaaligner-band-width <int>
-        default: 0
-        Band width for cuda alignment. Must be >= 0. Non-zero allows user defined
-        band width, whereas 0 implies auto band width determination.
+> **For Racon settings we have to look at the help output:**
+>```
+>racon [options ...] <sequences> <overlaps> <target sequences>
+>    # default output is stdout
+>    <sequences> # input file in FASTA/FASTQ format (can be compressed with gzip) containing sequences used for correction
+>    <overlaps> # input file in MHAP/PAF/SAM format (can be compressed with gzip) containing overlaps between sequences and target sequences
+>    <target sequences> # input file in FASTA/FASTQ format (can be compressed with gzip) containing sequences which will be corrected
+>
+>options:
+>    -u, --include-unpolished # output unpolished target sequences
+>    -f, --fragment-correction # perform fragment correction instead of contig polishing (overlaps file should contain dual/self overlaps!)
+>    -w, --window-length <int> # default: 500, size of window on which POA is performed
+>    -q, --quality-threshold <float> # default: 10.0, threshold for average base quality of windows used in POA
+>    -e, --error-threshold <float> # default: 0.3, maximum allowed error rate used for filtering overlaps
+>    --no-trimming # disables consensus trimming at window ends
+>    -m, --match <int> # default: 3, score for matching bases
+>    -x, --mismatch <int> # default: -5, score for mismatching bases
+>    -g, --gap <int> # default: -4, gap penalty (must be negative)
+>    -t, --threads <int> # default: 1, number of threads
+>    --version # prints the version number
+>    -h, --help # prints the usage
+>
+>only available when built with CUDA:
+>    -c, --cudapoa-batches <int> # default: 0, number of batches for CUDA accelerated polishing per GPU
+>    -b, --cuda-banded-alignment # use banding approximation for polishing on GPU. Only applicable when -c is used.
+>    --cudaaligner-batches <int> # default: 0, number of batches for CUDA accelerated alignment per GPU
+>    --cudaaligner-band-width <int> # default: 0, Band width for cuda alignment. Must be >= 0. Non-zero allows user defined band width, whereas 0 implies auto band width determination.
 ```
    
-.. note::
-
-   Sometimes the assembly file has a different file extension that `minimap2`is not able to recognize, e.g., in the case of SMARTdenovo, where the assembly file ends in `.cns`. In that case we will have to add `.fasta` as the file extension.
-   ```
-   cp PATH/TO/ASSEMBLY.zmo.cns PATH/TO/WORKDIR/
-   mv PATH/TO/WORKDIR/ASSEMBLY.zmo.cns PATH/TO/WORKDIR/ASSEMBLY.zmo.cns.fasta
-   ```
+> **NOTE:**
+> Sometimes the assembly file has a different file extension that `minimap2`is not able to recognize, e.g., in the case of SMARTdenovo, where the assembly file ends in `.cns`. In that case we will have to add `.fasta` as the file extension.
+> ```
+> cp PATH/TO/ASSEMBLY.zmo.cns PATH/TO/WORKDIR/
+> mv PATH/TO/WORKDIR/ASSEMBLY.zmo.cns PATH/TO/WORKDIR/ASSEMBLY.zmo.cns.fasta
+> ```
 
 Because it is recommended to perform four rounds of Racon polishing we will have to redo the analysis 3x each with the newly produced assembly produced in the previous round:
 ```

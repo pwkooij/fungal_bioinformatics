@@ -7,9 +7,9 @@
 - Data Trimming
 - Genome Assembly
 
-Will use a lot of Linux command line, for reminders have a look out the [[Tech help|tech section]].
+Will use a lot of Linux command line, for reminders have a look at the Help page for technical stuff.
 
-References to the papers about the software and other helpful papers you can find in the [[References]] chapter.
+References to the papers about the software and other helpful papers you can find in the References chapter.
 ## Brief introduction to polyphasic taxonomy
 Some helpful links:
 > **To check name status**
@@ -23,10 +23,6 @@ Some helpful links:
 > - Unite: https://unite.ut.ee/
 > - Mycoportal: https://www.mycoportal.org/portal/
 > - Mould identification: a virtual self assessment: https://www.adelaide.edu.au/mycology/mould-identification-a-virtual-self-assessment
-
-.. note::
-
-   Testing the note this way
 
 ## Data Quality Check (QC)
 
@@ -90,21 +86,21 @@ make -f FANCYNAME.mak
 ```
 > **_NOTE:_**
 > SMARTdenovo -h gives:
-> ```
-> smartdenovo -h
+>```
+>smartdenovo -h
 >
 >Unknown option: h
 >
 >Usage: smartdenovo.pl [options] <reads.fa>
 >
 >Options:
- > -p STR     output prefix [wtasm]
- > -e STR     engine of overlaper, compressed kmer overlapper(zmo), dot matrix overlapper(dmo), [dmo]
+> -p STR     output prefix [wtasm]
+> -e STR     engine of overlaper, compressed kmer overlapper(zmo), dot matrix overlapper(dmo), [dmo]
 >  -t INT     number of threads [8]
- > -k INT     k-mer length for overlapping [16]
-  >           for large genome as human, please use 17
- > -J INT     min read length [5000]
- > -c INT     generate consensus, [0]
+> -k INT     k-mer length for overlapping [16]
+>           for large genome as human, please use 17
+> -J INT     min read length [5000]
+> -c INT     generate consensus, [0]
 >```
 > Consider if you want to change -J read length to a different size, change the kmer length, or if you want to use their newer dot matrix overlapper
 
