@@ -14,7 +14,7 @@
               "type": "markdown",
               "state": {
                 "file": "docs/source/Day2.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
@@ -109,7 +109,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Welcome.md",
+                "file": "docs/source/Day2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,7 +119,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Welcome"
+              "title": "Backlinks for Day2"
             }
           },
           {
@@ -178,12 +178,13 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "89a766de3d1635b8",
+  "active": "365e03572e3dad2f",
   "lastOpenFiles": [
-    "docs/source/Day2.md",
     "docs/source/Day1.md",
-    "docs/source/Day3.md",
+    "docs/source/Day2.md",
     "docs/source/References.md",
+    "docs/source/Tech help.md",
+    "docs/source/Day3.md",
     "docs/source/Day1 backup.md",
     "docs/source/api.md",
     "docs/source/index.md",
