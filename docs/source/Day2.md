@@ -83,6 +83,89 @@ C:95.3% (S:94.7%, D:0.6%), F:0.7%, M:4.0%, n:3870, E:5.7%     
 3870    Total BUSCO groups searched
 ```
 
+### Contamination and overall statistics check
+Even if we try to work as clean as possible we sometimes still pick up contaminations that end up in our sequence results. Luckily there are tools that can help identify contaminated reads and select to remove them. Blobtools is one such tool: it uses BLAST, Diamond, minimap2, and BUSCO to give overall statistics and matches to the closest organisms for each of the reads.
+The software is quite extensive, so we might skip this but I will leave the codes here for you to use (if there is time or in the future).
+
+Also, I have never run this on a server and it seems they have some instructions for this: https://blobtoolkit.genomehubs.org/pipeline/pipeline-tutorials/running-the-pipeline-on-a-cluster/
+
+The full package of blobtools, know as blobtoolkit, exists of several steps that can be performed in whichever order you prefer with the exception of setting up the results folder and creating the base file for the analyses:
+#### Create meta data yaml file
+First we will need to create a file called `meta.yaml`which contains some basic information about your sample, e.g.;
+```
+record_type: scaffold 
+taxon: 
+	name: Leucoagaricus gongylophorus 
+	taxid: 79220 
+	phylum: Basidiomycota
+```
+As previously, you can use your favourite text editor for this (e.g., nano, gedit, vim, etc)
+#### Create a BlobDir
+Next we need to create a results folder called the BlobDir and add the information from the `meta.yaml`file as well as some information regarding the taxonomy of the sample. For this you will need to know the NCBI taxid (https://www.ncbi.nlm.nih.gov/taxonomy):
+```
+blobtools create --fasta PATH/TO/ASSEMBLY_FILE --meta meta.yaml --taxid XXXX --taxdump PATH/TO/taxdump PATH/TO/OUTPUT/DIRECTORY
+```
+And we will merge all information together into a single file:
+```
+cat PATH/TO/BlobDir/meta.json
+```
+#### Use BLAST and UNIPROT to identify contaminations
+This part works best when you have a local copy of the BLAST and UNIPROT databases, however, this takes up almost a 1TB...
+##### BLAST 
+BLAST is a fantastic tool but it isn't very efficient in using its resources, i.e., blasting my assemblies generally takes about 3 days with 10 threads:
+```
+blastn -db nt -query PATH/TO/ASSEMBLY_FILE -outfmt "6 qseqid staxids bitscore std" -max_target_seqs 10 -max_hsps 1 -evalue 1e-25 -num_threads 10 -out PATH/TO/BlobDir/blast.out
+```
+##### UNIPROT
+UNIPROT is faster than BLAST but looks at proteins only, and, therefore, tends to have less hits:
+```
+diamond blastx --query PATH/TO/ASSEMBLY_FILE --db PATH/TO/uniprot/reference_proteomes.dmnd --outfmt 6 qseqid staxids bitscore qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore --sensitive --max-target-seqs 1 --evalue 1e-25 --threads 10 > PATH/TO/BlobDir/diamond.out
+```
+##### Adding BLAST and UNIPROT results to BlobDir
+Now we have generated the BLAST and UNIPROT results we need to add them to the overall BlobDir results:
+```
+blobtools add --hits PATH/TO/BlobDir/blast.out --hits PATH/TO/BlobDir/diamond.out --taxrule bestsumorder --taxdump PATH/TO/taxdump PATH/TO/BlobDir
+```
+#### Adding mapping coverage
+Next we will mapping coverage information for our assembly by mapping our reads back on to the assembly. This will show use how much coverage we will have for each contig.
+##### Using minimap2 to map reads
+```
+# SHORT READS
+minimap2 -ax sr -t 10 PATH/TO/ASSEMBLY_FILE PATH/TO/READS/illumina_1.fastq.gz PATH/TO/READS/illumina_2.fastq.gz | samtools sort -@10 -O BAM -o PATH/TO/BlobDir/NAME.shortreads.bam -
+
+# LONG READS -> in case of PacBio use -ax map-pb
+minimap2 -ax map-ont -t 10 PATH/TO/ASSEMBLY_FILE PATH/TO/READS/ont.fastq | samtools sort -@10 -O BAM -o PATH/TO/BlobDir/NAME.longreads.bam -
+```
+##### Adding mapping coverage of short and/or long reads to BlobDir
+And again we will add the results to the BlobDir:
+```
+# SHORT READS
+blobtools add --cov PATH/TO/BlobDir/NAME.shortreads.bam PATH/TO/BlobDir
+
+# LONG READS
+blobtools add --cov PATH/TO/BlobDir/NAME.longreads.bam PATH/TO/BlobDir
+```
+#### Add BUSCO scores
+##### Run BUSCO if necessary
+If BUSCO wasn't done yet, now is the time to do that, otherwise you can skip this step and immediately add your BUSCO results to the BlobDir:
+```
+busco -i PATH/TO/ASSEMBLY_FILE -o PATH/TO/OUTPUT -l YOUR_LINEAGE -m geno -c XX
+```
+##### Add to BUSCO results to BlobDir
+```
+blobtools add --busco PATH/TO/OUTPUT/run_YOUR_LINEAGE/full_table.tsv PATH/TO/BlobDir
+```
+#### Add links to BlobDir
+The next step will just add more background information to the results output and is optional:
+```
+blobtools add --link taxon.taxid.ENA="https://www.ebi.ac.uk/ena/ EBI ENA LINK OF YOUR SPECIES" --link taxon.name.Wikipedia="WIKIPEDIA LINK OF YOUR SPECIES" PATH/TO/BlobDir
+```
+#### Open dataset in BlobToolKit Viewer
+Now we have collected all information and it is time to visualize them! This will create a local URL you can open in a browser to look at Blobtools beautiful graphs:
+```
+blobtools view --remote PATH/TO/BlobDir
+```
+
 ## Polishing the assembly
 One way of improving the genome assembly is by comparing the obtained contigs to the reads used to create them, which we call polishing. 
 Once again, depending on the sequencing technique, we will have to use different software to do this.
@@ -142,31 +225,30 @@ racon -m 8 -x -6 -g -8 -w 500 -t XX [READS FILE] OUTPUT.sam [ASSEMBLY FILE] > OU
 
 > **For Racon settings we have to look at the help output:**
 >```
->racon [options ...] <sequences> <overlaps> <target sequences>
->    # default output is stdout
->    <sequences> # input file in FASTA/FASTQ format (can be compressed with gzip) containing sequences used for correction
->    <overlaps> # input file in MHAP/PAF/SAM format (can be compressed with gzip) containing overlaps between sequences and target sequences
->    <target sequences> # input file in FASTA/FASTQ format (can be compressed with gzip) containing sequences which will be corrected
+>racon {options} [sequences]  [overlaps]  [target sequences] # default output is stdout
+>   [sequences] # input file in FASTA/FASTQ format (can be compressed with gzip) containing sequences used for correction
+>    [overlaps] # input file in MHAP/PAF/SAM format (can be compressed with gzip) containing overlaps between sequences and target sequences
+>    [target sequences] # input file in FASTA/FASTQ format (can be compressed with gzip) containing sequences which will be corrected
 >
 >options:
 >    -u, --include-unpolished # output unpolished target sequences
 >    -f, --fragment-correction # perform fragment correction instead of contig polishing (overlaps file should contain dual/self overlaps!)
->    -w, --window-length <int> # default: 500, size of window on which POA is performed
->    -q, --quality-threshold <float> # default: 10.0, threshold for average base quality of windows used in POA
->    -e, --error-threshold <float> # default: 0.3, maximum allowed error rate used for filtering overlaps
+>    -w, --window-length [int] # default: 500, size of window on which POA is performed
+>    -q, --quality-threshold [float] # default: 10.0, threshold for average base quality of windows used in POA
+>    -e, --error-threshold [float] # default: 0.3, maximum allowed error rate used for filtering overlaps
 >    --no-trimming # disables consensus trimming at window ends
->    -m, --match <int> # default: 3, score for matching bases
->    -x, --mismatch <int> # default: -5, score for mismatching bases
->    -g, --gap <int> # default: -4, gap penalty (must be negative)
->    -t, --threads <int> # default: 1, number of threads
+>    -m, --match [int] # default: 3, score for matching bases
+>    -x, --mismatch [int] # default: -5, score for mismatching bases
+>    -g, --gap [int] # default: -4, gap penalty (must be negative)
+>    -t, --threads [int] # default: 1, number of threads
 >    --version # prints the version number
 >    -h, --help # prints the usage
 >
 >only available when built with CUDA:
->    -c, --cudapoa-batches <int> # default: 0, number of batches for CUDA accelerated polishing per GPU
+>    -c, --cudapoa-batches [int] # default: 0, number of batches for CUDA accelerated polishing per GPU
 >    -b, --cuda-banded-alignment # use banding approximation for polishing on GPU. Only applicable when -c is used.
->    --cudaaligner-batches <int> # default: 0, number of batches for CUDA accelerated alignment per GPU
->    --cudaaligner-band-width <int> # default: 0, Band width for cuda alignment. Must be >= 0. Non-zero allows user defined band width, whereas 0 implies auto band width determination.
+>    --cudaaligner-batches [int] # default: 0, number of batches for CUDA accelerated alignment per GPU
+>    --cudaaligner-band-width [int] # default: 0, Band width for cuda alignment. Must be >= 0. Non-zero allows user defined band width, whereas 0 implies auto band width determination.
 >```
    
 >**NOTE:**
@@ -203,3 +285,6 @@ Now we are ready to run Medaka:
 ```
 medaka_consensus -i PATH/TO/ONT.fastq.gz -d PATH/TO/RACON4_ASSEMBLY.fasta -o PATH/TO/OUTPUT -t XX -m MODEL
 ```
+
+## Genome annotation
+As mentioned during the whole workshop, also here there are many options, however, in the last few years a group of smart people put a nice package together specifically for analyzing fungal genomes named funannotate (https://funannotate.readthedocs.io/).
