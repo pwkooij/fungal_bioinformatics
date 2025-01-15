@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/source/Day1.md",
+                "file": "docs/source/Day2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Day1"
+              "title": "Day2"
             }
           }
         ]
@@ -178,14 +178,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "365e03572e3dad2f",
+  "active": "89a766de3d1635b8",
   "lastOpenFiles": [
-    "docs/source/Day3.md",
+    "docs/source/Day2.md",
     "docs/source/Day1.md",
+    "docs/source/Day3.md",
     "docs/source/References.md",
     "docs/source/Day1 backup.md",
     "docs/source/api.md",
-    "docs/source/Day2.md",
     "docs/source/index.md",
     "README.md",
     "Welcome.md",

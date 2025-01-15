@@ -7,6 +7,14 @@
 - Data Trimming
 - Genome Assembly
 
+## Brief introduction to polyphasic taxonomy
+Some helpful links:
+> **To check name status**
+> - Species Fungorum: https://www.speciesfungorum.org/
+> - Index Fungorum: https://www.indexfungorum.org/
+> - Mycobank: https://www.mycobank.org/
+> - Fungal Names: https://nmdc.cn/fungalnames/allfungal
+
 ## Data Quality Check (QC)
 
 Because sequence reads are generated differently by different sequencers we will also have to use different tools to analyse the data quality for these.
@@ -52,7 +60,8 @@ There are many many assemblers, but for (basidiomycetic) fungi I recommend ABySS
 ```
 abyss-pe np=8 k=31 name=path/to/output/prefix in='path/to/reads_1.fastq.gz path/to/reads_2.fastq.gz' &> path/to/verbose.log
 ```
->[!note]
+
+> **_NOTE:_**
 >Since it is always good to test your data, it is recommended to test different kmer sizes and pick the best one.
 
 In case you would like to try SPAdes:
@@ -66,7 +75,7 @@ I have tried various assemblers and so far my favourite is SMARTdenovo:
 smartdenovo -p PREFIX -c 1 -e zmo -t XX -J 500 PATH/TO/TRIMMED.fastq.gz > FANCYNAME.mak
 make -f FANCYNAME.mak
 ```
->[!note]
+> **_NOTE:_**
 > SMARTdenovo -h gives:
 > ```
 > smartdenovo -h
