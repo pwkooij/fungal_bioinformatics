@@ -167,14 +167,14 @@ racon -m 8 -x -6 -g -8 -w 500 -t XX [READS FILE] OUTPUT.sam [ASSEMBLY FILE] > OU
 >    -b, --cuda-banded-alignment # use banding approximation for polishing on GPU. Only applicable when -c is used.
 >    --cudaaligner-batches <int> # default: 0, number of batches for CUDA accelerated alignment per GPU
 >    --cudaaligner-band-width <int> # default: 0, Band width for cuda alignment. Must be >= 0. Non-zero allows user defined band width, whereas 0 implies auto band width determination.
-```
+>```
    
-> **NOTE:**
-> Sometimes the assembly file has a different file extension that `minimap2`is not able to recognize, e.g., in the case of SMARTdenovo, where the assembly file ends in `.cns`. In that case we will have to add `.fasta` as the file extension.
-> ```
-> cp PATH/TO/ASSEMBLY.zmo.cns PATH/TO/WORKDIR/
-> mv PATH/TO/WORKDIR/ASSEMBLY.zmo.cns PATH/TO/WORKDIR/ASSEMBLY.zmo.cns.fasta
-> ```
+>**NOTE:**
+>Sometimes the assembly file has a different file extension that `minimap2`is not able to recognize, e.g., in the case of SMARTdenovo, where the assembly file ends in `.cns`. In that case we will have to add `.fasta` as the file extension.
+>```
+>cp PATH/TO/ASSEMBLY.zmo.cns PATH/TO/WORKDIR/
+>mv PATH/TO/WORKDIR/ASSEMBLY.zmo.cns PATH/TO/WORKDIR/ASSEMBLY.zmo.cns.fasta
+>```
 
 Because it is recommended to perform four rounds of Racon polishing we will have to redo the analysis 3x each with the newly produced assembly produced in the previous round:
 ```
