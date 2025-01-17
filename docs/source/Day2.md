@@ -305,10 +305,10 @@ funannotate predict -i PATH/TO/MASKED_ASSEMBLY.fasta -o PATH/TO/OUTPUT --species
 This will create a set of gene models from our assembly that we can use to compare to various databases. Using `funannotate` we will compare the gene models with `interproscan`, `eggnog`, `antismash`, and `phobius`. We will start with `interproscan`:
 ```
 #run using docker
-funannotate iprscan -i PATH/TO/PREDICT_OUTPUT -m docker --cpus 12
+funannotate iprscan -i PATH/TO/PREDICT_OUTPUT/predict_results/ -m docker --cpus 12
 
 #run locally (Linux only)
-funannotate iprscan -i PATH/TO/PREDICT_OUTPUT -m local --iprscan_path /my/path/to/interproscan.sh
+funannotate iprscan -i PATH/TO/PREDICT_OUTPUT/predict_results/ -m local --iprscan_path /my/path/to/interproscan.sh -o OUTPUT
 ```
 
 Next we will analyse the data with `antismash` and `phobius`. If they are not installed locally, we can do both at the same time remotely:
