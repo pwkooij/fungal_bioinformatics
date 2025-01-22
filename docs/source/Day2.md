@@ -316,7 +316,29 @@ Next we will analyse the data with `antismash` and `phobius`. If they are not in
 funannotate remote -i PATH/TO/PREDICT_OUTPUT -m phobius antismash -e your-email@domain.edu
 ```
 
+>**NOTE:**
+>This doesn't work properly and is quite slow. We should have both `phobius` and `antismash` installed on the server, so we can run it locally.
+
+
+>**NOTE:**
+>THE BELOW PART IT STILL IN PROGRESS!
+
+For `phobius` locally:
+```
+phobius -short -i PATH/TO/annotate_misc/genome.proteins.fasta -o annotate_misc/phobius.results.txt -l logfiles/phobius.log 
+```
+
+For `antismash` locally:
+```
+antismash -t fungi -c 64 --databases PATH/TO/ANTISMASH/DATABASES --output-dir PATH/TO/OUTPUT --output-basename PREFIX -i PATH/TO/PREDICT_OUTPUT.gbk
+```
+
 Finally, we can combine all the analyses and do the actual annotation. If `eggnog` is installed locally, it will automatically add this analysis as well:
 ```
-funannotate annotate -i PATH/TO/PREDICT_OUTPUT --cpus 12
+funannotate annotate -i PATH/TO/PREDICT_OUTPUT --cpus 64
+```
+
+Alternatively, when running the `antismash` and `phobius` locally:
+```
+funannotate annotate -i PATH/TO/PREDICT_OUTPUT --antismash PATH/TO/ANTISMASH_RESULTS --cpus 64
 ```
