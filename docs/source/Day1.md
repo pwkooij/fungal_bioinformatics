@@ -96,7 +96,7 @@ porechop -i all.fastq.gz -o porechop_all.fastq.gz --threads 10 > porechop.out
 There are many many assemblers, but for (basidiomycetic) fungi I recommend ABySS:
 
 ```
-abyss-pe np=8 k=31 name=path/to/output/prefix in='path/to/reads_1.fastq.gz path/to/reads_2.fastq.gz' &> path/to/verbose.log
+abyss-pe np=8 k=31 B=2G name=path/to/output/prefix in='path/to/reads_1.fastq.gz path/to/reads_2.fastq.gz' &> path/to/verbose.log
 ```
 
 > **_NOTE:_**
