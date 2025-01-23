@@ -102,6 +102,9 @@ abyss-pe np=8 k=31 B=2G name=path/to/output/prefix in='path/to/reads_1.fastq.gz 
 > **_NOTE:_**
 >Since it is always good to test your data, it is recommended to test different kmer sizes and pick the best one.
 
+> **_NOTE:_**
+> ADD LOOP INSTRUCTIONS HERE
+
 In case you would like to try SPAdes:
 ```
 spades.py --pe1-1 path/to/lib1/reads_1.fastq.gz --pe1-2 path/to/lib1/reads_2.fastq.gz --pe2-1 path/to/lib2/reads_1.fastq.gz --pe2-2 path/to/lib2/reads_2.fastq.gz -o path/to/output -t XX -m XX
