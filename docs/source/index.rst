@@ -27,5 +27,7 @@ Contents
    4assemblyQC
    5polishing
    6annotation
+   7comparative
+   8phylogenomics
    Tech help
    References
