@@ -1,4 +1,4 @@
-# Genome annotation
+# 6. Genome annotation
 As mentioned during the whole workshop, also here there are many options, however, in the last few years a group of smart people put a nice package together specifically for analyzing fungal genomes named funannotate (https://funannotate.readthedocs.io/).
 
 Genome annotation benefits from RNAseq results but this is not necessary. We can still get good predictions of genes with just a genome assembly.
