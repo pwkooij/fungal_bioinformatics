@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/source/README.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               },
@@ -178,7 +178,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "fccae4536c42fc54",
+  "active": "12b0770aa7019f38",
   "lastOpenFiles": [
     "docs/source/6annotation.md",
     "docs/source/Day1.md",
@@ -196,7 +196,7 @@
     "docs/source/Day1 backup.md",
     "docs/source/api.md",
     "docs/source/index.md",
-    "docs/source/README.md",
+    "README.md",
     "Welcome.md",
     "docs/source/index.mdrst.rst",
     "README copy.rst"
