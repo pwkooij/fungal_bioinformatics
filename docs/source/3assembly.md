@@ -9,9 +9,15 @@ abyss-pe np=8 k=31 B=2G name=path/to/output/prefix in='path/to/reads_1.fastq.gz 
 
 > **_NOTE:_**
 >Since it is always good to test your data, it is recommended to test different kmer sizes and pick the best one.
-
-> **_NOTE:_**
-> ADD LOOP INSTRUCTIONS HERE
+>The best way to do this is by write a loop script. For example, if you would like to test 15 different kmers with steps of 10 from 20 to 160:
+>```
+>declare -a k_list=("20" "30" "40" "50" "60" "70" "80" "90" "100" "110" "120" "130" "140" "150" "160")
+>
+>for k in "${k_list[@]}"; do
+>    mkdir PATH/TO/OUTPUT_DIRECTORY/k$k
+>    abyss-pe np=8 k=$k -C PATH/TO/OUTPUT_DIRECTORY/k$k name=Ccos_symbiont_k$k in='PATH/TO/forward_paired_trimmed.fastq.gz PATH/TO/reverse_paired_trimmed.fastq.gz' se='PATH/TO/unpaired_trimmed.fastq.gz'
+>done
+>```
 
 In case you would like to try SPAdes:
 ```
