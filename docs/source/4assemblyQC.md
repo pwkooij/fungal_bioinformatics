@@ -155,3 +155,13 @@ Now we have collected all information and it is time to visualize them! This wil
 ```
 blobtools view --remote PATH/TO/BlobDir
 ```
+
+## ITS extraction to identify with BLAST
+Another quick way to see if you sequenced the correct thing is to blast the rDNA regions commonly used for fungal barcoding, i.e., ITS (internal transcribed spacers 1 & 2 and 5.8S), LSU (large subunit rDNA), and SSU (small subunit rDNA). 
+To make this more easy I adapted an existing python script (ITS only: https://github.com/pwkooij/Extract-ITS-sequences-from-a-fungal-genome/tree/master) and made it possible to extract all rDNA regions: https://github.com/pwkooij/Extract-ITS-sequences-from-a-fungal-genome/blob/patch-1/README.md
+
+```
+python extractITS.py -which ITS2 -i genome.fasta -o ./output/ -name mySpecies
+```
+
+This python script relies on ITSx (Bengtsson-Palme et al., 2013) and Barrnap (https://github.com/tseemann/barrnap), as well as biopython and pandas, which means that these need to be installed (in the same environment) in order to make it work.

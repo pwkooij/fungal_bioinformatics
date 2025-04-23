@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/source/3assembly.md",
+                "file": "docs/source/4assemblyQC.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "3assembly"
+              "title": "4assemblyQC"
             }
           }
         ]
@@ -181,22 +181,22 @@
   },
   "active": "fccae4536c42fc54",
   "lastOpenFiles": [
+    "docs/source/3assembly.md",
+    "docs/source/4assemblyQC.md",
+    "docs/source/References.md",
+    "docs/source/2trimming.md",
+    "docs/source/1dataQC.md",
+    "docs/source/0.2basecalling.md",
     "docs/source/0.1taxonomy.md",
     "docs/source/Tech help.md",
     "docs/source/5polishing.md",
     "docs/source/6annotation.md",
     "docs/source/8phylogenomics.md",
     "docs/source/7comparative.md",
-    "docs/source/1dataQC.md",
     "README.md",
     "docs/source/Day1.md",
     "docs/source/Day2.md",
     "docs/source/Day3.md",
-    "docs/source/4assemblyQC.md",
-    "docs/source/3assembly.md",
-    "docs/source/2trimming.md",
-    "docs/source/0.2basecalling.md",
-    "docs/source/References.md",
     "docs/source/Day1 backup.md",
     "docs/source/api.md",
     "docs/source/index.md",
