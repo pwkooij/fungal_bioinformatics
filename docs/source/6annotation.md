@@ -40,13 +40,15 @@ funannotate remote -i PATH/TO/PREDICT_OUTPUT -m phobius antismash -e your-email@
 
 For `phobius` locally:
 ```
-phobius -short -i PATH/TO/annotate_misc/genome.proteins.fasta -o annotate_misc/phobius.results.txt -l logfiles/phobius.log 
+phobius -short -o annotate_misc/phobius.results.txt -l logfiles/phobius.log PATH/TO/annotate_misc/genome.proteins.fasta
 ```
 
 For `antismash` locally:
 ```
-antismash -t fungi -c 64 --databases PATH/TO/ANTISMASH/DATABASES --output-dir PATH/TO/OUTPUT --output-basename PREFIX -i PATH/TO/PREDICT_OUTPUT.gbk
+antismash -t fungi -c 64 --databases PATH/TO/ANTISMASH/DATABASES --output-dir PATH/TO/OUTPUT --output-basename PREFIX PATH/TO/PREDICT_OUTPUT.gbk
 ```
+the last input file could also be `PATH/TO/PREDICT_OUT.fasta`.
+If `funannotate predict` generates a gff3 file you can use the extra option `--genefinding-gff3 PATH/TO/GFF3-FILE`.
 
 Finally, we can combine all the analyses and do the actual annotation. If `eggnog` is installed locally, it will automatically add this analysis as well:
 ```
