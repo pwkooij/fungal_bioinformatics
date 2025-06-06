@@ -25,7 +25,8 @@ Contents
    2trimming
    3assembly
    4assemblyQC
-   5polishing
+   5.0polishing
+   5.1heterozygosity
    6annotation
    7comparative
    8phylogenomics
